@@ -1,0 +1,26 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# AI / Computer Vision
+torch==2.3.0
+torchvision==0.18.0
+opencv-python-headless==4.9.0.80
+Pillow==10.3.0
+numpy==1.26.4
+
+# Object detection
+ultralytics==8.2.18
+
+# Storage
+minio==7.2.7
+boto3==1.34.100
+
+# HTTP
+httpx==0.27.0
+
+# Utilities
+structlog==24.1.0
+python-dotenv==1.0.1
+tenacity==8.3.0
