@@ -1,12 +1,35 @@
-# AVAS — AI-Powered Infrastructure Inspection Intelligence Platform
 
-> Detect defects, score risk, prioritize maintenance — automatically.
+# 🛡️ AVAS — AI-Powered Infrastructure Inspection Intelligence Platform
+
+> Detect defects, score risk, and prioritize maintenance — automatically.  
+
+[![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)]()
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.99.0-green?style=for-the-badge&logo=fastapi)]()
+[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?style=for-the-badge&logo=typescript)]()
+[![Docker](https://img.shields.io/badge/Docker-24.0.2-2496ED?style=for-the-badge&logo=docker)]()
+[![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)]()
 
 ---
 
-## Architecture
+## 🌟 Overview
+
+**AVAS** is an enterprise-grade platform that leverages AI and computer vision to **automatically detect infrastructure defects, assess risk, and prioritize maintenance**.  
+
+**Highlights**:  
+
+- 🏗️ AI-powered defect detection (YOLOv8)  
+- 📊 Rule-based and ML-enhanced risk scoring  
+- 📈 Analytics dashboard & historical tracking  
+- 🔐 Secure JWT-based authentication  
+- 🚀 Fully containerized & production-ready  
+
+---
+
+## 🏛️ Architecture
 
 ```
+
 ┌─────────────────────────────────────────────────────────┐
 │                      AVAS Platform                       │
 ├──────────────┬──────────────┬──────────────┬────────────┤
@@ -15,142 +38,114 @@
 │  Tailwind    │  PostgreSQL  │  Risk Model  │  (S3-compat│
 │  Port :3000  │  Port :8000  │  Port :8001  │  Port :9000│
 └──────────────┴──────────────┴──────────────┴────────────┘
-```
+
+````
+
+**Stack:** React | TailwindCSS | TypeScript | FastAPI | PostgreSQL | YOLOv8 | MinIO | Docker  
 
 ---
 
-## Quick Start
+## ⚡ Quick Start
 
 ```bash
-# 1. Clone the repo
+# Clone repository
 git clone https://github.com/your-org/avas.git
 cd avas
 
-# 2. Run the quickstart script (auto-generates secrets)
+# Quickstart with auto-generated secrets
 bash infrastructure/scripts/quickstart.sh
 
-# 3. Open in browser
+# Open in browser
 open http://localhost:3000
-```
+````
 
 ---
 
-## Project Structure
+## 📊 Key Features
 
-```
-avas/
-├── backend/                  # FastAPI Python backend
-│   ├── app/
-│   │   ├── api/v1/           # REST API endpoints
-│   │   ├── core/             # Config, DB, security, logging
-│   │   ├── models/           # SQLAlchemy ORM models
-│   │   ├── schemas/          # Pydantic request/response schemas
-│   │   └── services/         # Business logic layer
-│   │       ├── ai/           # AI client + inspection service
-│   │       ├── analytics/    # Dashboard analytics
-│   │       └── storage/      # MinIO object storage
-│   └── tests/
-│
-├── ai_service/               # AI microservice (YOLOv8 inference)
-│   ├── app/
-│   │   ├── models/           # Defect detection + risk scoring
-│   │   ├── processors/       # Image preprocessing pipeline
-│   │   └── utils/            # Storage + logging utilities
-│   └── tests/
-│
-├── frontend/                 # React + TypeScript SPA
-│   └── src/
-│       ├── components/       # UI components
-│       ├── pages/            # Dashboard, Inspections, Assets
-│       ├── services/         # Axios API client
-│       ├── store/            # Zustand state management
-│       └── types/            # TypeScript interfaces
-│
-├── infrastructure/
-│   ├── docker/               # Service Dockerfiles
-│   ├── nginx/                # Reverse proxy config
-│   └── scripts/              # DB init, quickstart
-│
-└── docker-compose.yml        # Full stack orchestration
-```
+| Feature                | Description                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 🖼️ Defect Detection   | YOLOv8 detects cracks, corrosion, spalling, delamination, erosion, broken/missing components, discoloration |
+| ⚡ Risk Scoring         | Rule-based composite score (0–100) combining severity, type, confidence, and defect count                   |
+| 🏗️ Asset Management   | Track infrastructure assets with inspection history & risk prioritization                                   |
+| 📈 Dashboard Analytics | Visualize inspection results, risk trends, and top-risk assets                                              |
+| 🔒 Security            | JWT authentication & role-based access control                                                              |
+| 📦 Containerized       | Fully Dockerized with AI microservice and MinIO storage                                                     |
 
 ---
 
-## API Endpoints
+## 📋 API Endpoints
 
 ### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/auth/register` | Register new user |
-| POST | `/api/v1/auth/login` | Login → JWT tokens |
-| POST | `/api/v1/auth/refresh` | Refresh access token |
+
+| Method | Endpoint                | Description          |
+| ------ | ----------------------- | -------------------- |
+| POST   | `/api/v1/auth/register` | Register user        |
+| POST   | `/api/v1/auth/login`    | Login (JWT tokens)   |
+| POST   | `/api/v1/auth/refresh`  | Refresh access token |
 
 ### Inspections
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/inspections` | Create inspection |
-| POST | `/api/v1/inspections/{id}/upload` | Upload images |
-| POST | `/api/v1/inspections/{id}/analyze` | Trigger AI analysis |
-| GET | `/api/v1/inspections` | List inspections (paginated) |
-| GET | `/api/v1/inspections/{id}` | Get inspection + defects |
+
+| Method | Endpoint                           | Description            |
+| ------ | ---------------------------------- | ---------------------- |
+| POST   | `/api/v1/inspections`              | Create inspection      |
+| POST   | `/api/v1/inspections/{id}/upload`  | Upload images          |
+| POST   | `/api/v1/inspections/{id}/analyze` | Run AI analysis        |
+| GET    | `/api/v1/inspections`              | List inspections       |
+| GET    | `/api/v1/inspections/{id}`         | Get inspection details |
 
 ### Assets
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/assets` | Create asset |
-| GET | `/api/v1/assets` | List assets (sorted by risk) |
-| GET | `/api/v1/assets/{id}` | Get asset |
-| DELETE | `/api/v1/assets/{id}` | Delete asset |
+
+| Method | Endpoint              | Description         |
+| ------ | --------------------- | ------------------- |
+| POST   | `/api/v1/assets`      | Create asset        |
+| GET    | `/api/v1/assets`      | List assets by risk |
+| GET    | `/api/v1/assets/{id}` | Get asset info      |
+| DELETE | `/api/v1/assets/{id}` | Delete asset        |
 
 ### Analytics
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/analytics/dashboard` | Dashboard stats |
-| GET | `/api/v1/analytics/risk-summary` | Asset risk ranking |
+
+| Method | Endpoint                         | Description        |
+| ------ | -------------------------------- | ------------------ |
+| GET    | `/api/v1/analytics/dashboard`    | Dashboard stats    |
+| GET    | `/api/v1/analytics/risk-summary` | Asset risk ranking |
 
 ---
 
-## AI Models
+## 🤖 AI Models
 
-### Defect Detection (YOLOv8)
-Detects 8 defect classes:
-- `crack` — Structural cracks
-- `corrosion` — Metal corrosion
-- `erosion` — Material erosion
-- `delamination` — Layer separation
-- `spalling` — Concrete spalling
-- `broken_component` — Broken parts
-- `missing_component` — Missing parts
-- `discoloration` — Surface discoloration
+### YOLOv8 Defect Detection
 
-> **Note:** The default model uses YOLOv8n weights. For production, fine-tune on your infrastructure inspection dataset and replace `models_cache/defect_detection.pt`.
+Detects **8 defect types**:
+`crack`, `corrosion`, `erosion`, `delamination`, `spalling`, `broken_component`, `missing_component`, `discoloration`
 
-### Risk Scoring
-Rule-based composite risk scorer (0-100) that weighs:
-- Defect severity (critical/high/medium/low)
-- Defect type multipliers
-- Model confidence scores
-- Total defect count
+> Fine-tune the default YOLOv8n model for production on your inspection dataset.
+
+### Risk Scoring (0–100)
+
+| Score  | Meaning   |
+| ------ | --------- |
+| 0–40   | ✅ GO      |
+| 40–70  | ⚠️ REVIEW |
+| 70–100 | 🚫 NO-GO  |
 
 ---
 
-## Environment Variables
+## ⚙️ Environment Variables
 
-See `.env.example` for all configuration options. Key variables:
-
-| Variable | Description |
-|----------|-------------|
-| `APP_SECRET_KEY` | Application secret (auto-generated by quickstart) |
-| `JWT_SECRET_KEY` | JWT signing key (auto-generated by quickstart) |
-| `DATABASE_URL` | PostgreSQL connection string |
-| `REDIS_URL` | Redis connection string |
-| `MINIO_ENDPOINT` | Object storage endpoint |
-| `AI_SERVICE_URL` | AI microservice URL |
-| `AI_INFERENCE_TIMEOUT` | Max seconds for AI analysis (default: 120) |
+| Variable               | Description                             |
+| ---------------------- | --------------------------------------- |
+| `APP_SECRET_KEY`       | Application secret                      |
+| `JWT_SECRET_KEY`       | JWT signing key                         |
+| `DATABASE_URL`         | PostgreSQL connection                   |
+| `REDIS_URL`            | Redis connection                        |
+| `MINIO_ENDPOINT`       | Object storage endpoint                 |
+| `AI_SERVICE_URL`       | AI microservice URL                     |
+| `AI_INFERENCE_TIMEOUT` | Max AI inference seconds (default: 120) |
 
 ---
 
-## Development
+## 💻 Development
 
 ```bash
 # Backend only
@@ -169,21 +164,25 @@ docker compose up --build
 
 ---
 
-## Production Checklist
+## 🚀 Production Checklist
 
-- [ ] Set all `CHANGE_ME` values in `.env`
-- [ ] Replace YOLOv8n with fine-tuned defect detection model
-- [ ] Configure SSL certificates in `infrastructure/nginx/ssl/`
-- [ ] Set `APP_ENV=production` and `APP_DEBUG=false`
-- [ ] Set `APP_CORS_ORIGINS` to your actual domain
-- [ ] Configure SMTP for email notifications
-- [ ] Enable GPU support in `docker-compose.yml` if available
-- [ ] Set up database backups for PostgreSQL
-- [ ] Configure external S3 (AWS/GCS) for production storage
+* [ ] Replace YOLOv8n with fine-tuned defect model
+* [ ] Set `.env` variables (`APP_ENV=production`, `APP_DEBUG=false`)
+* [ ] Configure SSL in `infrastructure/nginx/ssl/`
+* [ ] Enable GPU support if available
+* [ ] Setup database backups (PostgreSQL)
+* [ ] Configure S3-compatible storage
 
 ---
 
-## License
+## 📄 License
 
-MIT — Built by AVAS Team
-#
+MIT — Built by **AVAS Team**
+
+<div align="center">
+Built with ❤️ by **AVAS Team** | <a href="https://github.com/your-org/avas">GitHub Repository</a>
+</div>
+```
+
+
+Do you want me to do that next?
